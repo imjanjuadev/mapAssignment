@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import QuartzCore
 import RadioButton
 
 class FormViewController : UIViewController, UIPickerViewDelegate,UIPickerViewDataSource {
@@ -16,6 +17,9 @@ class FormViewController : UIViewController, UIPickerViewDelegate,UIPickerViewDa
     @IBOutlet weak var userCellNumber: UITextField!
     @IBOutlet weak var cellNumberError: UILabel!
     @IBOutlet weak var riderName: UITextField!
+    
+    @IBOutlet weak var tripDateLable: UILabel!
+    @IBOutlet weak var riderLable: UILabel!
     
     @IBOutlet weak var userLocationLable: UITextField!
     @IBOutlet weak var userLocationPicker: UIPickerView!
@@ -28,28 +32,31 @@ class FormViewController : UIViewController, UIPickerViewDelegate,UIPickerViewDa
         if sender.tag == 1 {
             cashBtn.isSelected = true
             creditBtn.isSelected = false
-            paymentMethod.text = "Cash"
+            paymentMethod.text = "CASH"
         }
         
         else if sender.tag == 2{
             cashBtn.isSelected = false
             creditBtn.isSelected = true
-            paymentMethod.text = "Credit"
+            paymentMethod.text = "CREDIT"
         }
     }
-    
+        
     let datePicker = UIDatePicker()
     
     var recieveRiderName = ""
     
     let userLocationData = [String](arrayLiteral: "New Dehli", "London", "Lahore","New York City")
         
+    /*ViewDidLoad Function*/
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        createDatePicker()
         resetForm()
         riderName.text = recieveRiderName
         userLocationPicker.delegate = self
+        createTripDateLable()
+        createRiderLable()
     }
     
     
@@ -80,6 +87,14 @@ class FormViewController : UIViewController, UIPickerViewDelegate,UIPickerViewDa
             return "Cell Number Must have 10 Digits"
         }
         return nil
+    }
+    func createTripDateLable(){
+        riderLable.layer.cornerRadius = 5
+        riderLable.layer.masksToBounds = true
+    }
+    func createRiderLable(){
+        tripDateLable.layer.cornerRadius = 5
+        tripDateLable.layer.masksToBounds = true
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
